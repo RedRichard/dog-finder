@@ -7,6 +7,7 @@ const Search = () => {
         "https://frontend-take-home-service.fetch.com/dogs/breeds",
         {
           method: "GET",
+          mode: "cors",
           credentials: "include",
         }
       );

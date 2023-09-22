@@ -16,6 +16,8 @@ const Login = () => {
         "https://frontend-take-home-service.fetch.com/auth/login",
         {
           method: "POST",
+          mode: "cors",
+          credentials: "include",
           headers: {
             "Content-Type": "application/json",
           },
@@ -23,7 +25,6 @@ const Login = () => {
             name: username,
             email: email,
           }),
-          credentials: "include",
         }
       );
 
@@ -34,7 +35,6 @@ const Login = () => {
       else console.log("An error in the request has occurred.");
     }
     setLoading(false);
-    console.log("finished");
   };
 
   useEffect(() => {
@@ -49,6 +49,8 @@ const Login = () => {
             <label>
               Username:
               <input
+                id="username"
+                autoComplete="username"
                 type="text"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
@@ -58,8 +60,10 @@ const Login = () => {
           </div>
           <div>
             <label>
-              Password:
+              Email:
               <input
+                id="email"
+                autoComplete="email"
                 type="text"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
