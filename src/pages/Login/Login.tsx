@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [error, setError] = useState<string>();
   const [loading, setLoading] = useState<boolean>(false);
+  const [loggedIn, setLoggedIn] = useState<boolean>(false);
 
   const logIn = async () => {
     setLoading(true);
@@ -24,13 +27,19 @@ const Login = () => {
         }
       );
 
-      if (!res.ok) throw new Error("Please check your data");
+      if (res.ok) setLoggedIn(true);
+      else throw new Error("Please check your data");
     } catch (err: unknown) {
       if (err instanceof Error) setError(err.message);
       else console.log("An error in the request has occurred.");
     }
     setLoading(false);
+    console.log("finished");
   };
+
+  useEffect(() => {
+    if (loggedIn) navigate("/search");
+  }, [loggedIn, navigate]);
 
   return (
     <div className="h-screen w-screen flex flex-row items-center justify-center">
