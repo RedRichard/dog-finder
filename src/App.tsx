@@ -4,8 +4,10 @@ function App() {
   const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [error, setError] = useState<string>();
+  const [loading, setLoading] = useState<boolean>(false);
 
   const logIn = async () => {
+    setLoading(true);
     try {
       const res = await fetch(
         "https://frontend-take-home-service.fetch.com/auth/login",
@@ -25,7 +27,9 @@ function App() {
       if (!res.ok) throw new Error("Please check your data");
     } catch (err: unknown) {
       if (err instanceof Error) setError(err.message);
+      else console.log("An error in the request has occurred.");
     }
+    setLoading(false);
   };
 
   return (
@@ -62,6 +66,7 @@ function App() {
           Log In
         </button>
         {error && <div className="w-full bg-red-500 text-white">{error}</div>}
+        {loading && <div>Loading...</div>}
       </div>
     </div>
   );
