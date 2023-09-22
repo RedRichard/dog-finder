@@ -46,7 +46,7 @@ const Login = () => {
       <div className="">
         <form>
           <div>
-            <label>
+            <label htmlFor="username">
               Username:
               <input
                 id="username"
@@ -59,7 +59,7 @@ const Login = () => {
             </label>
           </div>
           <div>
-            <label>
+            <label htmlFor="email">
               Email:
               <input
                 id="email"
