@@ -16,7 +16,6 @@ const Login = () => {
         "https://frontend-take-home-service.fetch.com/auth/login",
         {
           method: "POST",
-          mode: "cors",
           headers: {
             "Content-Type": "application/json",
           },
@@ -24,6 +23,7 @@ const Login = () => {
             name: username,
             email: email,
           }),
+          credentials: "include",
         }
       );
 
