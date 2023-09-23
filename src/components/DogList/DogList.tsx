@@ -16,7 +16,10 @@ const DogList = () => {
       try {
         const res = await fetchData<IDogSearch>({
           endpoint: "/dogs/search",
-          params: { size: "5", from: "0" },
+          params: {
+            size: DEFAULT_SEARCH_SIZE.toString(),
+            from: (selectedIndex * DEFAULT_SEARCH_SIZE).toString(),
+          },
         });
         const dogIds = await res.json();
         setDogSearch(dogIds);
@@ -26,7 +29,7 @@ const DogList = () => {
     };
 
     getDogIds();
-  }, []);
+  }, [selectedIndex]);
 
   useEffect(() => {
     const getDogData = async () => {
