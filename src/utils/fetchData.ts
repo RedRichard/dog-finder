@@ -30,6 +30,10 @@ async function fetchData<T = undefined>({
         customConfig
       );
 
+      if (res.status === 401) {
+        window.location.replace("/login");
+        throw new Error("Unauthorized");
+      }
       if (!res.ok) throw new Error("Unable to retrieve data.");
 
       return Promise.resolve(res);
