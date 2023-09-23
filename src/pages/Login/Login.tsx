@@ -29,34 +29,6 @@ const Login = () => {
     }
   };
 
-  // const logIn = async () => {
-  //   setLoading(true);
-  //   try {
-  //     const res = await fetch(
-  //       "https://frontend-take-home-service.fetch.com/auth/login",
-  //       {
-  //         method: "POST",
-  //         mode: "cors",
-  //         credentials: "include",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //         body: JSON.stringify({
-  //           name: username,
-  //           email: email,
-  //         }),
-  //       }
-  //     );
-
-  //     if (res.ok) setLoggedIn(true);
-  //     else throw new Error("Please check your data");
-  //   } catch (err: unknown) {
-  //     if (err instanceof Error) setError(err.message);
-  //     else console.log("An error in the request has occurred.");
-  //   }
-  //   setLoading(false);
-  // };
-
   useEffect(() => {
     if (loggedIn) navigate("/search");
   }, [loggedIn, navigate]);
