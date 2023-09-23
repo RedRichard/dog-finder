@@ -68,7 +68,7 @@ const DogList = () => {
                 } ${index === selectedIndex ? "text-red-500" : "text-black"}`}
                 onClick={(e) => setSelectedIndex(index)}
               >
-                {` ${index + 1}    `}
+                {index + 1}
               </div>
             )
           )}
