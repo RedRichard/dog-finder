@@ -1,22 +1,7 @@
 import React, { useState, useEffect } from "react";
 import IDog from "../../interfaces/IDog";
-import IDogSearch from "../../interfaces/IDogSearch";
 import DogCard from "../DogCard/DogCard";
-
-// interface IDog {
-//   img: string;
-//   name: string;
-//   age: number;
-//   breed: string;
-//   zip_code: string;
-//   id: string;
-// }
-
-// interface IDogSearch {
-//   next: string;
-//   resultIds: Array<string>;
-//   total: number;
-// }
+import fetchData from "../../utils/fetchData";
 
 const DogList = () => {
   const [dogIds, setDogIds] = useState<Array<string>>();
@@ -25,25 +10,13 @@ const DogList = () => {
   useEffect(() => {
     const getDogIds = async () => {
       try {
-        const res = await fetch(
-          "https://frontend-take-home-service.fetch.com/dogs/search",
-          {
-            method: "GET",
-            mode: "cors",
-            credentials: "include",
-          }
-        );
-
-        if (!res.ok) throw new Error("Unable to retrieve dog ids.");
-
-        const data = await res.json();
-        setDogIds((data as IDogSearch).resultIds);
+        const res = await fetchData({
+          endpoint: "/dogs/search",
+        });
+        const dogIds = await res.json();
+        setDogIds(dogIds.resultIds);
       } catch (e) {
-        if (e instanceof Error) console.log(e.message);
-        else
-          console.log(
-            `An error has occurred while retrieving dogs' information.`
-          );
+        console.error("An error has occurred", e);
       }
     };
 
@@ -53,40 +26,19 @@ const DogList = () => {
   useEffect(() => {
     const getDogData = async () => {
       try {
-        const res = await fetch(
-          "https://frontend-take-home-service.fetch.com/dogs",
-          {
-            method: "POST",
-            mode: "cors",
-            credentials: "include",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(dogIds),
-          }
-        );
-
-        if (!res.ok) throw new Error("Unable to retrieve dog data.");
-
-        const data = await res.json();
-
-        // console.log(data);
-        setDogsData(data);
+        const res = await fetchData<Array<string>>({
+          endpoint: "/dogs",
+          body: dogIds,
+        });
+        const dogsData = await res.json();
+        setDogsData(dogsData);
       } catch (e) {
-        if (e instanceof Error) console.log(e.message);
-        else
-          console.log(
-            `An error has occurred while retrieving dogs' information.`
-          );
+        console.error("An error has occurred", e);
       }
     };
 
     if (dogIds) getDogData();
   }, [dogIds]);
-
-  useEffect(() => {
-    if (dogsData) console.log(dogsData);
-  }, [dogsData]);
 
   return (
     <div>

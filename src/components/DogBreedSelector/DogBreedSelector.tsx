@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import fetchData from "../../utils/fetchData";
 
 interface IDogBreedSelector {
   selectedBreed: string;
@@ -14,22 +15,13 @@ const DogBreedSelector = ({
   useEffect(() => {
     const getBreeds = async () => {
       try {
-        const res = await fetch(
-          "https://frontend-take-home-service.fetch.com/dogs/breeds",
-          {
-            method: "GET",
-            mode: "cors",
-            credentials: "include",
-          }
-        );
-
-        if (res.ok) {
-          const data = await res.json();
-          setDogBreeds(data);
-        } else throw new Error(`Couldn't get dog breeds`);
-      } catch (err) {
-        if (err instanceof Error) console.log(err.message);
-        else console.log("An error has occurred");
+        const res = await fetchData<Array<string>>({
+          endpoint: "/dogs/breeds",
+        });
+        const breeds = await res.json();
+        setDogBreeds(breeds);
+      } catch (e) {
+        console.error("An error has occurred", e);
       }
     };
 
