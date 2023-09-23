@@ -19,6 +19,7 @@ const DogList = () => {
           params: {
             size: DEFAULT_SEARCH_SIZE.toString(),
             from: (selectedIndex * DEFAULT_SEARCH_SIZE).toString(),
+            sort: "breed:asc",
           },
         });
         const dogIds = await res.json();
