@@ -13,7 +13,7 @@ const Login = () => {
   const logIn = async () => {
     try {
       setLoading(true);
-      await fetchData<void, { name: string; email: string }>({
+      await fetchData<{ name: string; email: string }>({
         endpoint: "/auth/login",
         body: {
           name: username,
@@ -22,6 +22,7 @@ const Login = () => {
       });
       setLoggedIn(true);
     } catch (e) {
+      setError("Please check your data");
       console.error("An error has occurred.", e);
     } finally {
       setLoading(false);
