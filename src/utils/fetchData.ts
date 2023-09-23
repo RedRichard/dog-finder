@@ -2,12 +2,14 @@ interface IFetchData<T> {
   endpoint: string;
   body?: T;
   config?: RequestInit;
+  params?: Record<string, string>;
 }
 
 async function fetchData<T = undefined>({
   endpoint,
   body,
   config,
+  params,
 }: IFetchData<T>) {
   const headers = {
     "Content-Type": "application/json",
@@ -26,7 +28,8 @@ async function fetchData<T = undefined>({
   const fetchData = async () => {
     try {
       const res = await fetch(
-        `https://frontend-take-home-service.fetch.com${endpoint}`,
+        `https://frontend-take-home-service.fetch.com${endpoint}` +
+          `${params ? "?" + new URLSearchParams(params) : ""}`,
         customConfig
       );
 
