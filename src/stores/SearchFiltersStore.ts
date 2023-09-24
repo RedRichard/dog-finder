@@ -11,7 +11,7 @@ const DEFAULT_SEARCH_SIZE: number = 25;
 
 class SearchFiltersStore {
   selectedIndex: number = 0;
-  selectedBreed: strin | undefined = undefined;
+  selectedBreed: string | undefined = undefined;
   minAge: number | undefined = undefined;
   maxAge: number | undefined = undefined;
 
@@ -58,7 +58,7 @@ class SearchFiltersStore {
     ) as Array<SearchParams>;
 
     for (let i = 0; i < keys.length; i++) {
-      if (!params[keys[i]]) delete params[keys[i]];
+      if (params[keys[i]] === undefined) delete params[keys[i]];
     }
 
     return params;
