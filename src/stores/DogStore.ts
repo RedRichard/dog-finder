@@ -2,11 +2,10 @@ import { makeAutoObservable } from "mobx";
 import IDogSearch from "../interfaces/IDogSearch";
 import IDog from "../interfaces/IDog";
 import fetchData from "../utils/fetchData";
-
-const DEFAULT_SEARCH_SIZE: number = 25;
+import searchFiltersStore from "./SearchFiltersStore";
 
 class DogStore {
-  selectedIndex: number = 0;
+  // selectedIndex: number = 0;
   dogSearch: IDogSearch = { next: "", resultIds: [], total: 0 };
   dogsData: Array<IDog> = [];
 
@@ -14,25 +13,30 @@ class DogStore {
     makeAutoObservable(this);
   }
 
-  setSelectedIndex(index: number) {
-    this.selectedIndex = index;
-    this.makeDogSearch();
-  }
+  // setSelectedIndex(index: number) {
+  //   this.selectedIndex = index;
+  //   this.makeDogSearch();
+  // }
+
+  // resetSelectedIndex() {
+  //   this.selectedIndex = 0;
+  // }
 
   *makeDogSearch() {
+    // const params: ISearchParams = { breeds: searchFiltersStore.selectedBreed };
+    // if (searchFiltersStore.searchParams) this.resetSelectedIndex();
     try {
       // Make dog id search
       const resSearch: Response = yield fetchData<IDogSearch>({
         endpoint: "/dogs/search",
         params: {
-          size: DEFAULT_SEARCH_SIZE.toString(),
-          from: (this.selectedIndex * DEFAULT_SEARCH_SIZE).toString(),
           sort: "breed:asc",
+          ...searchFiltersStore.searchParams,
         },
       });
       const search: IDogSearch = yield resSearch.json();
       this.dogSearch = search;
-      // console.log(search);
+      console.log(search);
 
       // Get dog data
       const resDogs: Response = yield fetchData<Array<string>>({
@@ -40,7 +44,7 @@ class DogStore {
         body: search.resultIds,
       });
       const dogsData: Array<IDog> = yield resDogs.json();
-      // console.log(dogsData);
+      console.log(dogsData);
       this.dogsData = dogsData;
     } catch (e) {
       console.error("An error has occurred", e);

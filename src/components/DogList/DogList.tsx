@@ -3,6 +3,7 @@ import DogCard from "../DogCard/DogCard";
 import { observer } from "mobx-react-lite";
 import { autorun } from "mobx";
 import dogStore from "../../stores/DogStore";
+import searchFiltersStore from "../../stores/SearchFiltersStore";
 
 const DEFAULT_SEARCH_SIZE: number = 25;
 
@@ -10,15 +11,6 @@ const DogList = observer(() => {
   useEffect(() => {
     dogStore.makeDogSearch();
   }, []);
-
-  // useEffect(
-  //   () =>
-  //     autorun(() => {
-  //       console.log("autorun");
-  //       console.log(dogStore.dogsData);
-  //     }),
-  //   []
-  // );
 
   return (
     <div>
@@ -36,15 +28,17 @@ const DogList = observer(() => {
             <div
               key={index}
               className={`h-4 w-4 cursor-pointer ${
-                (dogStore.selectedIndex < 4 && index < 9) ||
-                (index < dogStore.selectedIndex + 5 &&
-                  index > dogStore.selectedIndex - 5)
+                (searchFiltersStore.selectedIndex < 4 && index < 9) ||
+                (index < searchFiltersStore.selectedIndex + 5 &&
+                  index > searchFiltersStore.selectedIndex - 5)
                   ? "block"
                   : "hidden"
               } ${
-                index === dogStore.selectedIndex ? "text-red-500" : "text-black"
+                index === searchFiltersStore.selectedIndex
+                  ? "text-red-500"
+                  : "text-black"
               }`}
-              onClick={(e) => dogStore.setSelectedIndex(index)}
+              onClick={(e) => searchFiltersStore.setSelectedIndex(index)}
             >
               {index + 1}
             </div>
