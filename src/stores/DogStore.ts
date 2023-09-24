@@ -22,6 +22,12 @@ class DogStore {
     }
   }
 
+  deleteSelectedDogId(dogId: string) {
+    delete this.selectedDogsId[dogId];
+    console.log(Object.keys(this.selectedDogsId));
+    this.makeSelectedDogsSearch();
+  }
+
   *makeDogSearch() {
     try {
       // Make dog id search

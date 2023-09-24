@@ -10,12 +10,15 @@ const SelectedDogList = observer(() => {
 
   return (
     <div>
-      {dogStore.selectedDogsData &&
-        dogStore.selectedDogsData.map((dogData, index) => (
-          <div key={index}>
-            <DogCard dogData={dogData} />
-          </div>
-        ))}
+      <div>{`You have selected ${dogStore.selectedDogsData.length} dogs`}</div>
+      <div>
+        {dogStore.selectedDogsData &&
+          dogStore.selectedDogsData.map((dogData, index) => (
+            <div key={index}>
+              <DogCard dogData={dogData} removable />
+            </div>
+          ))}
+      </div>
     </div>
   );
 });
