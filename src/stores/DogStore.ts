@@ -36,7 +36,7 @@ class DogStore {
       });
       const search: IDogSearch = yield resSearch.json();
       this.dogSearch = search;
-      console.log(search);
+      // console.log(search);
 
       // Get dog data
       const resDogs: Response = yield fetchData<Array<string>>({
@@ -44,7 +44,7 @@ class DogStore {
         body: search.resultIds,
       });
       const dogsData: Array<IDog> = yield resDogs.json();
-      console.log(dogsData);
+      // console.log(dogsData);
       this.dogsData = dogsData;
     } catch (e) {
       console.error("An error has occurred", e);
