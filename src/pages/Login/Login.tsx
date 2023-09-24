@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import fetchData from "../../utils/fetchData";
+import loadingLogo from "../../assets/loading.svg";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -34,45 +35,63 @@ const Login = () => {
   }, [loggedIn, navigate]);
 
   return (
-    <div className="h-screen w-screen flex flex-row items-center justify-center">
-      <div className="">
-        <form>
-          <div>
-            <label htmlFor="username">
-              Username:
-              <input
-                id="username"
-                autoComplete="username"
-                type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                className="border-[1px] border-black rounded-md"
-              />
-            </label>
-          </div>
-          <div>
-            <label htmlFor="email">
-              Email:
-              <input
-                id="email"
-                autoComplete="email"
-                type="text"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="border-[1px] border-black rounded-md"
-              />
-            </label>
-          </div>
-        </form>
-        <button
-          className="bg-slate-500 text-white rounded-md w-full"
-          onClick={logIn}
+    <div className="h-screen w-screen flex flex-row items-center justify-center bg-royal-purple">
+      {/* <div className="w-fit h-fit flex flex-col items-center"> */}
+      <div className="bg-cornflower-blue w-screen h-fit mx-4 md:w-[40vw] lg:w-[30vw] rounded-md">
+        <form
+          className="h-full w-full p-8 text-white flex flex-col justify-center gap-2"
+          onSubmit={async (e) => {
+            e.preventDefault();
+            await logIn();
+          }}
         >
-          Log In
-        </button>
-        {error && <div className="w-full bg-red-500 text-white">{error}</div>}
-        {loading && <div>Loading...</div>}
+          <div className="flex flex-col">
+            <label htmlFor="username">Username:</label>
+            <input
+              id="username"
+              autoComplete="username"
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              className="border-[1px] border-black rounded-md border-none text-black p-2"
+            />
+          </div>
+          <div className="flex flex-col">
+            <label htmlFor="email">Email:</label>
+            <input
+              id="email"
+              autoComplete="email"
+              type="text"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="border-[1px] border-black rounded-md border-none text-black p-2"
+            />
+          </div>
+
+          <button
+            className="bg-slate-500 text-white rounded-md w-full"
+            // onClick={logIn}
+          >
+            Log In
+          </button>
+        </form>
+        {loading && (
+          <div className="w-full flex flex-row justify-center mb-4">
+            <img
+              src={loadingLogo}
+              className="animate-spin h-[10%] w-[10%] "
+              alt="loading logo"
+            />
+          </div>
+        )}
+        {error && (
+          <div className="py-2 text-center rounded-md w-full bg-red-500 text-white">
+            {error}
+          </div>
+        )}
       </div>
+
+      {/* </div> */}
     </div>
   );
 };
