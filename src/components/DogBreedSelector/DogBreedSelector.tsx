@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
 import fetchData from "../../utils/fetchData";
+import searchFiltersStore from "../../stores/SearchFiltersStore";
+import { observer } from "mobx-react-lite";
 
-interface IDogBreedSelector {
-  selectedBreed: string;
-  handleSelectedBreed: (breed: string) => void;
-}
+// interface IDogBreedSelector {
+//   selectedBreed: string;
+//   handleSelectedBreed: (breed: string) => void;
+// }
 
-const DogBreedSelector = ({
-  selectedBreed,
-  handleSelectedBreed,
-}: IDogBreedSelector) => {
+const DogBreedSelector = observer(() => {
   const [dogBreeds, setDogBreeds] = useState<Array<string>>();
 
   useEffect(() => {
@@ -34,8 +33,8 @@ const DogBreedSelector = ({
         <select
           id="dog-breeds"
           name="dog-breeds"
-          value={selectedBreed}
-          onChange={(e) => handleSelectedBreed(e.target.value)}
+          value={searchFiltersStore.selectedBreed}
+          onChange={(e) => searchFiltersStore.setSelectedBreed(e.target.value)}
         >
           {dogBreeds &&
             dogBreeds.map((dogBreed, index) => (
@@ -47,6 +46,6 @@ const DogBreedSelector = ({
       </label>
     </div>
   );
-};
+});
 
 export default DogBreedSelector;

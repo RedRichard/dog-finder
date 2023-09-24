@@ -1,4 +1,4 @@
-import { makeAutoObservable, autorun } from "mobx";
+import { makeAutoObservable } from "mobx";
 import IDogSearch from "../interfaces/IDogSearch";
 import IDog from "../interfaces/IDog";
 import fetchData from "../utils/fetchData";
