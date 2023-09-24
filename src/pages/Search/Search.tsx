@@ -6,11 +6,13 @@ import { observer } from "mobx-react-lite";
 import dogStore from "../../stores/DogStore";
 import SelectedDogList from "../../components/SelectedDogList/SelectedDogList";
 import DogMatcher from "../../components/DogMatcher/DogMatcher";
+import DogAgeSelector from "../../components/DogAgeSelector/DogAgeSelector";
 
 const Search = observer(() => {
   return (
     <div>
       <DogBreedSelector />
+      <DogAgeSelector />
       <DogList />
       <SearchPageSelectors />
 

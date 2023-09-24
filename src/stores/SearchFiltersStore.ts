@@ -1,15 +1,19 @@
 import { makeAutoObservable } from "mobx";
 import dogStore from "./DogStore";
 
-interface ISearchParams {
-  breeds: string;
+enum SearchParams {
+  Breeds = "breeds",
+  From = "from",
+  Size = "size",
 }
 
 const DEFAULT_SEARCH_SIZE: number = 25;
 
 class SearchFiltersStore {
-  selectedBreed: string = "";
   selectedIndex: number = 0;
+  selectedBreed: strin | undefined = undefined;
+  minAge: number | undefined = undefined;
+  maxAge: number | undefined = undefined;
 
   constructor() {
     makeAutoObservable(this);
@@ -30,14 +34,34 @@ class SearchFiltersStore {
     dogStore.makeDogSearch();
   }
 
+  setMinAge(age: number) {
+    this.minAge = age;
+    dogStore.makeDogSearch();
+  }
+
+  setMaxAge(age: number) {
+    this.maxAge = age;
+    dogStore.makeDogSearch();
+  }
+
   get searchParams() {
-    const defaultParams = {
+    const params = {
       from: (this.selectedIndex * DEFAULT_SEARCH_SIZE).toString(),
       size: DEFAULT_SEARCH_SIZE.toString(),
+      breeds: this.selectedBreed,
+      ageMin: this.minAge,
+      ageMax: this.maxAge,
     };
-    if (this.selectedBreed)
-      return { breeds: this.selectedBreed, ...defaultParams };
-    else return defaultParams;
+
+    const keys: Array<SearchParams> = Object.keys(
+      params
+    ) as Array<SearchParams>;
+
+    for (let i = 0; i < keys.length; i++) {
+      if (!params[keys[i]]) delete params[keys[i]];
+    }
+
+    return params;
   }
 
   get numPageSelector() {
