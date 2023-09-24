@@ -5,26 +5,24 @@ import fetchData from "../utils/fetchData";
 import searchFiltersStore from "./SearchFiltersStore";
 
 class DogStore {
-  // selectedIndex: number = 0;
   dogSearch: IDogSearch = { next: "", resultIds: [], total: 0 };
   dogsData: Array<IDog> = [];
+  selectedDogsData: Array<IDog> = [];
+  selectedDogsId: Record<string, number> = {};
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  // setSelectedIndex(index: number) {
-  //   this.selectedIndex = index;
-  //   this.makeDogSearch();
-  // }
-
-  // resetSelectedIndex() {
-  //   this.selectedIndex = 0;
-  // }
+  addSelectedDogId(dogId: string) {
+    if (!this.selectedDogsId[dogId]) {
+      this.selectedDogsId[dogId] = 1;
+      console.log(Object.keys(this.selectedDogsId));
+      this.makeSelectedDogsSearch();
+    }
+  }
 
   *makeDogSearch() {
-    // const params: ISearchParams = { breeds: searchFiltersStore.selectedBreed };
-    // if (searchFiltersStore.searchParams) this.resetSelectedIndex();
     try {
       // Make dog id search
       const resSearch: Response = yield fetchData<IDogSearch>({
@@ -46,6 +44,21 @@ class DogStore {
       const dogsData: Array<IDog> = yield resDogs.json();
       // console.log(dogsData);
       this.dogsData = dogsData;
+    } catch (e) {
+      console.error("An error has occurred", e);
+    }
+  }
+
+  *makeSelectedDogsSearch() {
+    try {
+      // Get dog data
+      const resDogs: Response = yield fetchData<Array<string>>({
+        endpoint: "/dogs",
+        body: Object.keys(this.selectedDogsId),
+      });
+      const dogsData: Array<IDog> = yield resDogs.json();
+      // console.log(dogsData);
+      this.selectedDogsData = dogsData;
     } catch (e) {
       console.error("An error has occurred", e);
     }
