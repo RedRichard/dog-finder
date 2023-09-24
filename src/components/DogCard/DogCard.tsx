@@ -9,8 +9,6 @@ interface IDogCard {
 }
 
 const DogCard = observer(({ dogData, removable = false }: IDogCard) => {
-  const [selected, setSelected] = useState<boolean>(false);
-
   return (
     <div
       className={`border-[2px] m-1 ${
@@ -20,7 +18,6 @@ const DogCard = observer(({ dogData, removable = false }: IDogCard) => {
       }
       ${!removable ? "cursor-pointer" : ""}`}
       onClick={() => {
-        // console.log(dogData.id);
         if (!removable) dogStore.addSelectedDogId(dogData.id);
       }}
     >
