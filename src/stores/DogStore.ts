@@ -1,6 +1,7 @@
 import { makeAutoObservable } from "mobx";
 import IDogSearch from "../interfaces/IDogSearch";
 import IDog from "../interfaces/IDog";
+import IDogMatch from "../interfaces/IDogMatch";
 import fetchData from "../utils/fetchData";
 import searchFiltersStore from "./SearchFiltersStore";
 
@@ -9,6 +10,7 @@ class DogStore {
   dogsData: Array<IDog> = [];
   selectedDogsData: Array<IDog> = [];
   selectedDogsId: Record<string, number> = {};
+  matchedDogData: IDog | undefined = undefined;
 
   constructor() {
     makeAutoObservable(this);
@@ -17,7 +19,7 @@ class DogStore {
   addSelectedDogId(dogId: string) {
     if (!this.selectedDogsId[dogId]) {
       this.selectedDogsId[dogId] = 1;
-      console.log(Object.keys(this.selectedDogsId));
+      // console.log(Object.keys(this.selectedDogsId));
       this.makeSelectedDogsSearch();
     }
   }
@@ -26,6 +28,15 @@ class DogStore {
     delete this.selectedDogsId[dogId];
     console.log(Object.keys(this.selectedDogsId));
     this.makeSelectedDogsSearch();
+  }
+
+  *getDogData(dogIds: Array<string>) {
+    const resDogs: Response = yield fetchData<Array<string>>({
+      endpoint: "/dogs",
+      body: dogIds,
+    });
+    const dogsData: Array<IDog> = yield resDogs.json();
+    return dogsData;
   }
 
   *makeDogSearch() {
@@ -40,16 +51,8 @@ class DogStore {
       });
       const search: IDogSearch = yield resSearch.json();
       this.dogSearch = search;
-      // console.log(search);
 
-      // Get dog data
-      const resDogs: Response = yield fetchData<Array<string>>({
-        endpoint: "/dogs",
-        body: search.resultIds,
-      });
-      const dogsData: Array<IDog> = yield resDogs.json();
-      // console.log(dogsData);
-      this.dogsData = dogsData;
+      this.dogsData = yield this.getDogData(search.resultIds);
     } catch (e) {
       console.error("An error has occurred", e);
     }
@@ -58,13 +61,26 @@ class DogStore {
   *makeSelectedDogsSearch() {
     try {
       // Get dog data
+      this.selectedDogsData = yield this.getDogData(
+        Object.keys(this.selectedDogsId)
+      );
+    } catch (e) {
+      console.error("An error has occurred", e);
+    }
+  }
+
+  *makeMatch() {
+    try {
+      // Get dog data
       const resDogs: Response = yield fetchData<Array<string>>({
-        endpoint: "/dogs",
+        endpoint: "/dogs/match",
         body: Object.keys(this.selectedDogsId),
       });
-      const dogsData: Array<IDog> = yield resDogs.json();
+      const dogsData: IDogMatch = yield resDogs.json();
       // console.log(dogsData);
-      this.selectedDogsData = dogsData;
+      const data: Array<IDog> = yield this.getDogData([dogsData.match]);
+      this.matchedDogData = data[0];
+      console.log(this.matchedDogData);
     } catch (e) {
       console.error("An error has occurred", e);
     }

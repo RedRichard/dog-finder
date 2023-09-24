@@ -5,6 +5,7 @@ import SearchPageSelectors from "../../components/SearchPageSelectors/SearchPage
 import { observer } from "mobx-react-lite";
 import dogStore from "../../stores/DogStore";
 import SelectedDogList from "../../components/SelectedDogList/SelectedDogList";
+import DogMatcher from "../../components/DogMatcher/DogMatcher";
 
 const Search = observer(() => {
   return (
@@ -13,7 +14,12 @@ const Search = observer(() => {
       <DogList />
       <SearchPageSelectors />
 
-      {dogStore.selectedDogsId && <SelectedDogList />}
+      {Object.keys(dogStore.selectedDogsId).length > 0 && (
+        <div>
+          <SelectedDogList />
+          <DogMatcher />
+        </div>
+      )}
     </div>
   );
 });
