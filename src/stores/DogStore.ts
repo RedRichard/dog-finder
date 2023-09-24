@@ -14,6 +14,11 @@ class DogStore {
     makeAutoObservable(this);
   }
 
+  setSelectedIndex(index: number) {
+    this.selectedIndex = index;
+    this.makeDogSearch();
+  }
+
   *makeDogSearch() {
     try {
       // Make dog id search

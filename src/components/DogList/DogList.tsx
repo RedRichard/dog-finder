@@ -12,7 +12,7 @@ const DEFAULT_SEARCH_SIZE: number = 25;
 const DogList = observer(() => {
   // const [dogSearch, setDogSearch] = useState<IDogSearch>();
   // const [dogsData, setDogsData] = useState<Array<IDog>>();
-  const [selectedIndex, setSelectedIndex] = useState<number>(0);
+  // const [selectedIndex, setSelectedIndex] = useState<number>(0);
 
   useEffect(() => {
     dogStore.makeDogSearch();
@@ -82,12 +82,15 @@ const DogList = observer(() => {
             <div
               key={index}
               className={`h-4 w-4 cursor-pointer ${
-                (selectedIndex < 4 && index < 9) ||
-                (index < selectedIndex + 5 && index > selectedIndex - 5)
+                (dogStore.selectedIndex < 4 && index < 9) ||
+                (index < dogStore.selectedIndex + 5 &&
+                  index > dogStore.selectedIndex - 5)
                   ? "block"
                   : "hidden"
-              } ${index === selectedIndex ? "text-red-500" : "text-black"}`}
-              onClick={(e) => setSelectedIndex(index)}
+              } ${
+                index === dogStore.selectedIndex ? "text-red-500" : "text-black"
+              }`}
+              onClick={(e) => dogStore.setSelectedIndex(index)}
             >
               {index + 1}
             </div>
