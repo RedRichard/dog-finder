@@ -39,6 +39,10 @@ class SearchFiltersStore {
       return { breeds: this.selectedBreed, ...defaultParams };
     else return defaultParams;
   }
+
+  get numPageSelector() {
+    return Math.ceil(dogStore.dogSearch.total / DEFAULT_SEARCH_SIZE);
+  }
 }
 
 const searchFiltersStore = new SearchFiltersStore();

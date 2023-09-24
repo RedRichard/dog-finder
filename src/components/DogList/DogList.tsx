@@ -21,13 +21,6 @@ const DogList = observer(() => {
             <DogCard dogData={dogData} />
           </div>
         ))}
-
-      <div className="flex flex-row gap-2 justify-center">
-        {dogStore.dogSearch &&
-          [
-            ...Array(Math.ceil(dogStore.dogSearch.total / DEFAULT_SEARCH_SIZE)),
-          ].map((x, index) => <PageSelector page={index} key={index} />)}
-      </div>
     </div>
   );
 });

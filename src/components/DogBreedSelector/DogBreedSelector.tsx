@@ -3,11 +3,6 @@ import fetchData from "../../utils/fetchData";
 import searchFiltersStore from "../../stores/SearchFiltersStore";
 import { observer } from "mobx-react-lite";
 
-// interface IDogBreedSelector {
-//   selectedBreed: string;
-//   handleSelectedBreed: (breed: string) => void;
-// }
-
 const DogBreedSelector = observer(() => {
   const [dogBreeds, setDogBreeds] = useState<Array<string>>();
 
