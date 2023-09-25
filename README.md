@@ -2,7 +2,7 @@
 
 A React app built with React, leveraging the power of TypeScript, TailwindCSS and MobX.
 
-<a href="https://doggle-matcher.netlify.app/login">Check it out!</a>
+<a href="https://doggle-matcher.netlify.app">Check it out!</a>
 
 ## Login Page
 
