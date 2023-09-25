@@ -7,7 +7,7 @@ const DogMatcher = observer(() => {
     <div className="p-4">
       <div className="flex flex-row justify-end">
         <button
-          className="bg-cornflower-blue p-4 w-full md:w-1/3 lg:w-1/4 font-semibold text-white rounded-md"
+          className="hover:bg-slate-800 bg-cornflower-blue p-4 w-full md:w-1/3 lg:w-1/4 font-semibold text-white rounded-md"
           onClick={() => dogStore.makeMatch()}
         >
           Match!
