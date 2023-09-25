@@ -7,7 +7,7 @@ enum SearchParams {
   Size = "size",
 }
 
-const DEFAULT_SEARCH_SIZE: number = 25;
+const DEFAULT_SEARCH_SIZE: number = 27;
 
 class SearchFiltersStore {
   selectedIndex: number = 0;

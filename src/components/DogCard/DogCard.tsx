@@ -9,6 +9,8 @@ interface IDogCard {
 }
 
 const DogCard = observer(({ dogData, removable = false }: IDogCard) => {
+  const [selected, setSelected] = useState<boolean>(false);
+
   return (
     <div
       className={`p-4 m-1 rounded-md ${
@@ -18,7 +20,14 @@ const DogCard = observer(({ dogData, removable = false }: IDogCard) => {
       }
       ${!removable ? "cursor-pointer" : ""}`}
       onClick={() => {
-        if (!removable) dogStore.addSelectedDogId(dogData.id);
+        if (!removable)
+          if (!selected) {
+            dogStore.addSelectedDogId(dogData.id);
+            setSelected(true);
+          } else {
+            dogStore.deleteSelectedDogId(dogData.id);
+            setSelected(false);
+          }
       }}
     >
       <div className="p-4 rounded-md bg-vista-blue">
