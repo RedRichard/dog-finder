@@ -1,4 +1,3 @@
-import React from "react";
 import searchFiltersStore from "../../stores/SearchFiltersStore";
 
 interface IPageSelector {
@@ -17,7 +16,7 @@ const PageSelector = ({ page }: IPageSelector) => {
               ? "text-red-500"
               : "text-black"
           }`}
-          onClick={(e) => searchFiltersStore.setSelectedIndex(page)}
+          onClick={() => searchFiltersStore.setSelectedIndex(page)}
         >
           {page + 1}
         </div>

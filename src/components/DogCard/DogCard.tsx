@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import IDog from "../../interfaces/IDog";
 import { observer } from "mobx-react-lite";
 import dogStore from "../../stores/DogStore";

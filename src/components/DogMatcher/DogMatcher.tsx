@@ -1,7 +1,5 @@
-import React, { useEffect } from "react";
 import { observer } from "mobx-react-lite";
 import dogStore from "../../stores/DogStore";
-import DogCard from "../DogCard/DogCard";
 import MatchedDogCard from "../MatchedDogCard/MatchedDogCard";
 
 const DogMatcher = observer(() => {

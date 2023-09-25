@@ -1,4 +1,3 @@
-import React from "react";
 import { observer } from "mobx-react-lite";
 import dogStore from "../../stores/DogStore";
 import searchFiltersStore from "../../stores/SearchFiltersStore";
@@ -8,7 +7,7 @@ const SearchPageSelectors = observer(() => {
   return (
     <div className="flex flex-row gap-2 p-4 justify-center">
       {dogStore.dogSearch &&
-        [...Array(searchFiltersStore.numPageSelector)].map((x, index) => (
+        [...Array(searchFiltersStore.numPageSelector)].map((_, index) => (
           <PageSelector page={index} key={index} />
         ))}
     </div>

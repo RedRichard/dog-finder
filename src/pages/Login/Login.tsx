@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import fetchData from "../../utils/fetchData";
 import loadingLogo from "../../assets/loading.svg";

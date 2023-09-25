@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from "react";
+import { useEffect } from "react";
 import DogCard from "../DogCard/DogCard";
-import { observer } from "mobx-react-lite";
-import { autorun } from "mobx";
 import dogStore from "../../stores/DogStore";
 import IDog from "../../interfaces/IDog";
 
