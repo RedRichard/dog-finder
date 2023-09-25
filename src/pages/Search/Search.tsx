@@ -7,12 +7,14 @@ import dogStore from "../../stores/DogStore";
 import SelectedDogList from "../../components/SelectedDogList/SelectedDogList";
 import DogMatcher from "../../components/DogMatcher/DogMatcher";
 import DogAgeSelector from "../../components/DogAgeSelector/DogAgeSelector";
+import SortBreedSelector from "../../components/SortBreedSelector/SortBreedSelector";
 
 const Search = observer(() => {
   return (
     <div className="bg-white">
       <div className="p-4">
         <div className="flex flex-col md:flex-row gap-4 p-4 rounded-md bg-cornflower-blue">
+          <SortBreedSelector />
           <DogBreedSelector />
           <DogAgeSelector />
         </div>

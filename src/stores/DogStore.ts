@@ -45,7 +45,6 @@ class DogStore {
       const resSearch: Response = yield fetchData<IDogSearch>({
         endpoint: "/dogs/search",
         params: {
-          sort: "breed:asc",
           ...searchFiltersStore.searchParams,
         },
       });

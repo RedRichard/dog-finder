@@ -14,6 +14,7 @@ class SearchFiltersStore {
   selectedBreed: string | undefined = undefined;
   minAge: number | undefined = undefined;
   maxAge: number | undefined = undefined;
+  sortBreed: string = "asc";
 
   constructor() {
     makeAutoObservable(this);
@@ -44,6 +45,11 @@ class SearchFiltersStore {
     dogStore.makeDogSearch();
   }
 
+  setSortBreed(order: string) {
+    this.sortBreed = order;
+    dogStore.makeDogSearch();
+  }
+
   get searchParams() {
     const params = {
       from: (this.selectedIndex * DEFAULT_SEARCH_SIZE).toString(),
@@ -51,6 +57,7 @@ class SearchFiltersStore {
       breeds: this.selectedBreed,
       ageMin: this.minAge,
       ageMax: this.maxAge,
+      sort: `breed:${this.sortBreed}`,
     };
 
     const keys: Array<SearchParams> = Object.keys(
