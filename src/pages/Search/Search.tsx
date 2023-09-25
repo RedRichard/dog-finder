@@ -22,7 +22,9 @@ const Search = observer(() => {
 
       {Object.keys(dogStore.selectedDogsId).length > 0 && (
         <div>
-          <div className="p-4 font-bold text-xl">{`You have selected ${dogStore.selectedDogsData.length} dogs:`}</div>
+          <div className="p-4 font-bold text-xl">{`You have selected ${
+            dogStore.selectedDogsData.length
+          } ${dogStore.selectedDogsData.length > 1 ? "dogs" : "dog"}`}</div>
           <DogList dogsData={dogStore.selectedDogsData} cardsRemovable={true} />
           <DogMatcher />
         </div>
