@@ -36,13 +36,13 @@ Once you have selected at least one dog, at the bottom of the screen a new butto
 
          npm install
 
-or
+      or
 
          bun install
 
 - Run the development server
   npm run dev
 
-or
+      or
 
          bun run dev
