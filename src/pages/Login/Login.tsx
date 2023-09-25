@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import fetchData from "../../utils/fetchData";
 import loadingLogo from "../../assets/loading.svg";
+import pawLogo from "../../assets/paw.svg";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -38,6 +39,9 @@ const Login = () => {
     <div className="h-screen w-screen flex flex-row items-center justify-center bg-royal-purple">
       {/* <div className="w-fit h-fit flex flex-col items-center"> */}
       <div className="bg-cornflower-blue w-screen h-fit mx-4 md:w-[40vw] lg:w-[30vw] rounded-md">
+        <div className="w-full flex flex-row justify-center pt-8">
+          <img src={pawLogo} className="h-[30%] w-[30%]" alt="loading logo" />
+        </div>
         <form
           className="h-full w-full p-8 text-white flex flex-col justify-center gap-2"
           onSubmit={async (e) => {
@@ -69,7 +73,7 @@ const Login = () => {
           </div>
 
           <button
-            className="bg-slate-500 text-white rounded-md w-full"
+            className="bg-slate-500 text-white rounded-md w-full h-[5vh] hover:bg-slate-800"
             // onClick={logIn}
           >
             Log In
