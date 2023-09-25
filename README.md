@@ -1,27 +1,48 @@
-# React + TypeScript + Vite
+# Doggle: The Dog-Human matcher
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React app built with React, leveraging the power of TypeScript, TailwindCSS and MobX.
 
-Currently, two official plugins are available:
+<a href="https://gatsby-uikit-blog-starter.netlify.app/">Check it out!</a>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Login Page
 
-## Expanding the ESLint configuration
+This page will let you login to the app. For this, you can type any username/email.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+<img src="https://github.com/RedRichard/dog-finder/blob/master/public/Login.png" width="600"/>
 
-- Configure the top-level `parserOptions` property like this:
+## Search Page
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+Once you've logged in, you will be redirected to this page, where you'll be able to select/unselect dogs by clicking their cards. At the top of the screen, you'll have access to different filters and, at the bottom, you'll be able to select the current search page.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+<img src="https://github.com/RedRichard/dog-finder/blob/master/public/Search1.png" width="600"/>
+
+As you select dogs, they will show up in a new list at the bottom, where you'll be able to view the current selections and delete them.
+
+<img src="https://github.com/RedRichard/dog-finder/blob/master/public/Search2.png" width="600"/>
+
+Once you have selected at least one dog, at the bottom of the screen a new button 'Match!' will show up, which you can click to get a result.
+
+<img src="https://github.com/RedRichard/dog-finder/blob/master/public/Search3.png" width="600"/>
+
+## How to set up
+
+- Clone the repository
+
+        git clone https://github.com/RedRichard/dog-finder.git
+
+- Enter the repository
+
+- Install dependencies
+
+         npm install
+
+or
+
+         bun install
+
+- Run the development server
+  npm run dev
+
+or
+
+         bun run dev
