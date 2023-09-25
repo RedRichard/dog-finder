@@ -14,10 +14,10 @@ const DogList = observer(() => {
   }, []);
 
   return (
-    <div>
+    <div className="flex flex-row flex-wrap">
       {dogStore.dogsData &&
         dogStore.dogsData.map((dogData, index) => (
-          <div key={index}>
+          <div key={index} className="w-full md:w-1/2 lg:w-1/3 ">
             <DogCard dogData={dogData} />
           </div>
         ))}
