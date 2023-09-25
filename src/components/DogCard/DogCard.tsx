@@ -31,6 +31,16 @@ const DogCard = observer(({ dogData, removable = false }: IDogCard) => {
       }}
     >
       <div className="p-4 rounded-md bg-vista-blue">
+        {removable && (
+          <div className="pb-2 pt-0 pr-3 flex flex-row justify-end">
+            <div
+              className="text-red-700 font-normal text-sm cursor-pointer"
+              onClick={() => dogStore.deleteSelectedDogId(dogData.id)}
+            >
+              Remove
+            </div>
+          </div>
+        )}
         <div className="w-full h-full flex flex-row">
           <div className="basis-[70%] flex flex-row p-2 rounded-md text-white justify-between">
             <div className="flex flex-col justify-between">
@@ -54,14 +64,6 @@ const DogCard = observer(({ dogData, removable = false }: IDogCard) => {
             />
           </div>
         </div>
-        {removable && (
-          <div
-            className="cursor-pointer"
-            onClick={() => dogStore.deleteSelectedDogId(dogData.id)}
-          >
-            x
-          </div>
-        )}
       </div>
     </div>
   );

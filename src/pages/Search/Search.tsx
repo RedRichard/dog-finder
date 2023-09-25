@@ -17,12 +17,13 @@ const Search = observer(() => {
           <DogAgeSelector />
         </div>
       </div>
-      <DogList />
+      <DogList dogsData={dogStore.dogsData} />
       <SearchPageSelectors />
 
       {Object.keys(dogStore.selectedDogsId).length > 0 && (
         <div>
-          <SelectedDogList />
+          <div className="p-4 font-bold text-xl">{`You have selected ${dogStore.selectedDogsData.length} dogs:`}</div>
+          <DogList dogsData={dogStore.selectedDogsData} cardsRemovable={true} />
           <DogMatcher />
         </div>
       )}
