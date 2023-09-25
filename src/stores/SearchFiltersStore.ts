@@ -51,12 +51,12 @@ class SearchFiltersStore {
   }
 
   get searchParams() {
-    const params = {
+    const params: Record<string, string> = {
       from: (this.selectedIndex * DEFAULT_SEARCH_SIZE).toString(),
       size: DEFAULT_SEARCH_SIZE.toString(),
-      breeds: this.selectedBreed,
-      ageMin: this.minAge,
-      ageMax: this.maxAge,
+      breeds: this.selectedBreed ?? "",
+      ageMin: this.minAge?.toString() ?? "",
+      ageMax: this.maxAge?.toString() ?? "",
       sort: `breed:${this.sortBreed}`,
     };
 
@@ -65,7 +65,7 @@ class SearchFiltersStore {
     ) as Array<SearchParams>;
 
     for (let i = 0; i < keys.length; i++) {
-      if (params[keys[i]] === undefined) delete params[keys[i]];
+      if (params[keys[i]] === "") delete params[keys[i]];
     }
 
     return params;
