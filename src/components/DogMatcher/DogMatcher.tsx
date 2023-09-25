@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { observer } from "mobx-react-lite";
 import dogStore from "../../stores/DogStore";
 import DogCard from "../DogCard/DogCard";
+import MatchedDogCard from "../MatchedDogCard/MatchedDogCard";
 
 const DogMatcher = observer(() => {
   return (
@@ -14,7 +15,15 @@ const DogMatcher = observer(() => {
           Match!
         </button>
       </div>
-      {dogStore.matchedDogData && <DogCard dogData={dogStore.matchedDogData} />}
+
+      <div className="font-bold text-xl pt-10 pb-4">{`Meet ${dogStore.matchedDogData?.name}, your new best friend!`}</div>
+      <div className="flex flex-row justify-center">
+        <div className="w-full md:w-1/2 lg:w-1/3">
+          {dogStore.matchedDogData && (
+            <MatchedDogCard dogData={dogStore.matchedDogData} />
+          )}
+        </div>
+      </div>
     </div>
   );
 });
