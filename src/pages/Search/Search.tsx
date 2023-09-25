@@ -10,9 +10,13 @@ import DogAgeSelector from "../../components/DogAgeSelector/DogAgeSelector";
 
 const Search = observer(() => {
   return (
-    <div>
-      <DogBreedSelector />
-      <DogAgeSelector />
+    <div className="bg-royal-purple">
+      <div className="p-4">
+        <div className="flex flex-col md:flex-row gap-4 p-4 rounded-md bg-cornflower-blue">
+          <DogBreedSelector />
+          <DogAgeSelector />
+        </div>
+      </div>
       <DogList />
       <SearchPageSelectors />
 

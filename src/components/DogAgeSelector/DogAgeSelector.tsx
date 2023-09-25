@@ -4,8 +4,8 @@ import searchFiltersStore from "../../stores/SearchFiltersStore";
 
 const DogAgeSelector = observer(() => {
   return (
-    <div>
-      <label htmlFor="dog-age-min">
+    <div className="flex flex-row gap-4 justify-between md:justify-start">
+      <label htmlFor="dog-age-min" className="text-white">
         Min Age
         <select
           id="dog-age-min"
@@ -14,13 +14,14 @@ const DogAgeSelector = observer(() => {
           onChange={(e) =>
             searchFiltersStore.setMinAge(parseInt(e.target.value))
           }
+          className="ml-2 border-[1px] border-black rounded-md border-none text-black p-2"
         >
           {[...Array(20)].map((_, index) => (
             <option key={index}>{index}</option>
           ))}
         </select>
       </label>
-      <label htmlFor="dog-age-max">
+      <label htmlFor="dog-age-max" className="text-white">
         {" "}
         Max Age
         <select
@@ -30,6 +31,7 @@ const DogAgeSelector = observer(() => {
           onChange={(e) =>
             searchFiltersStore.setMaxAge(parseInt(e.target.value))
           }
+          className="ml-2 border-[1px] border-black rounded-md border-none text-black p-2"
         >
           {[...Array(20)].map((_, index) => (
             <option key={index}>{index}</option>

@@ -30,6 +30,7 @@ const DogBreedSelector = observer(() => {
           name="dog-breeds"
           value={searchFiltersStore.selectedBreed}
           onChange={(e) => searchFiltersStore.setSelectedBreed(e.target.value)}
+          className="w-full md:w-auto border-[1px] border-black rounded-md border-none text-black p-2"
         >
           {dogBreeds &&
             dogBreeds.map((dogBreed, index) => (
