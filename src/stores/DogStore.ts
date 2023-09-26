@@ -19,14 +19,12 @@ class DogStore {
   addSelectedDogId(dogId: string) {
     if (!this.selectedDogsId[dogId]) {
       this.selectedDogsId[dogId] = 1;
-      // console.log(Object.keys(this.selectedDogsId));
       this.makeSelectedDogsSearch();
     }
   }
 
   deleteSelectedDogId(dogId: string) {
     delete this.selectedDogsId[dogId];
-    console.log(Object.keys(this.selectedDogsId));
     this.makeSelectedDogsSearch();
   }
 
@@ -76,10 +74,8 @@ class DogStore {
         body: Object.keys(this.selectedDogsId),
       });
       const dogsData: IDogMatch = yield resDogs.json();
-      // console.log(dogsData);
       const data: Array<IDog> = yield this.getDogData([dogsData.match]);
       this.matchedDogData = data[0];
-      console.log(this.matchedDogData);
     } catch (e) {
       console.error("An error has occurred", e);
     }
